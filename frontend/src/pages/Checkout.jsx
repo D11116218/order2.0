@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronLeft, Receipt, CheckCircle, Plus, Minus } from 'lucide-react';
+import { customizationGroups } from '../config/customization';
 import { getItemTotalPrice, getOrderTotal } from '../utils/price';
 import './Checkout.css';
-
-const customizationGroups = [
-  { id: 'egg', label: '加點', options: ['糖心蛋(半顆)+10'] }
-];
 
 const Checkout = ({ userName, orderItems, onUpdateItem, onClearOrder }) => {
   const navigate = useNavigate();

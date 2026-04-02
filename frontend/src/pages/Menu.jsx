@@ -2,11 +2,16 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { restaurantMenus } from '../data/menu';
 
-const Menu = ({ restaurantId = 'chicken-honke', orderItems, onUpdateItem }) => {
+const Menu = ({ restaurantId = 'chi-teng', orderItems, onUpdateItem }) => {
   const navigate = useNavigate();
-  const restaurant = restaurantMenus[restaurantId] || restaurantMenus['chicken-honke'];
+  const restaurant = restaurantMenus[restaurantId] || Object.values(restaurantMenus)[0];
+  
+  if (!restaurant) {
+    return <div className="p-10 text-center">找不到菜單資料</div>;
+  }
+
   const { name: restaurantName, categories, items: menuItems } = restaurant;
-  const [activeCategory, setActiveCategory] = useState(categories[0].id);
+  const [activeCategory, setActiveCategory] = useState(categories?.[0]?.id || '');
 
   const totalAmount = orderItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const totalCount  = orderItems.reduce((sum, item) => sum + item.quantity, 0);
